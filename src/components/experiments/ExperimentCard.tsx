@@ -1,69 +1,58 @@
 
+import { Card, CardContent, CardDescription, CardHeader } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 import { Link } from "react-router-dom";
-import { Button } from "@/components/ui/button";
-import { ChevronRight } from "lucide-react";
+
+type ExperimentDifficulty = 'Beginner' | 'Intermediate' | 'Advanced';
 
 interface ExperimentCardProps {
   title: string;
   description: string;
   imageUrl: string;
   category: string;
-  difficulty: 'Beginner' | 'Intermediate' | 'Advanced';
+  difficulty: ExperimentDifficulty;
   duration: string;
   path: string;
 }
 
-export function ExperimentCard({
-  title,
-  description,
-  imageUrl,
-  category,
-  difficulty,
+export function ExperimentCard({ 
+  title, 
+  description, 
+  imageUrl, 
+  category, 
+  difficulty, 
   duration,
-  path
+  path 
 }: ExperimentCardProps) {
-  // Map difficulty to appropriate color
-  const difficultyColors = {
-    'Beginner': 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200',
-    'Intermediate': 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200',
-    'Advanced': 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200'
-  };
-
   return (
-    <div className="experiment-card h-full flex flex-col">
-      <div className="relative h-48 overflow-hidden">
-        <img 
-          src={imageUrl} 
-          alt={title}
-          className="w-full h-full object-cover"
-        />
-        <div className="experiment-card-overlay">
-          <Button variant="secondary" size="sm" asChild>
-            <Link to={path}>Launch Experiment</Link>
-          </Button>
-        </div>
-        <div className="absolute top-2 left-2 bg-primary/80 text-primary-foreground text-xs px-2 py-1 rounded-md">
-          {category}
-        </div>
-      </div>
-      <div className="p-4 flex-1 flex flex-col">
-        <div className="flex justify-between items-start mb-2">
-          <h3 className="font-bold text-lg">{title}</h3>
-        </div>
-        <p className="text-sm text-muted-foreground mb-4 flex-1">{description}</p>
-        <div className="flex justify-between items-center mt-auto">
-          <span className={`text-xs px-2 py-1 rounded ${difficultyColors[difficulty]}`}>
+    <Card className="overflow-hidden transition-all hover:shadow-lg">
+      <Link to={path}>
+        <div className="aspect-video relative overflow-hidden">
+          <img 
+            src={imageUrl} 
+            alt={title} 
+            className="object-cover w-full h-full transition-transform hover:scale-105"
+          />
+          <Badge 
+            className="absolute top-2 right-2"
+            variant={
+              difficulty === 'Beginner' ? 'default' :
+              difficulty === 'Intermediate' ? 'secondary' :
+              'destructive'
+            }
+          >
             {difficulty}
-          </span>
-          <span className="text-xs text-muted-foreground">{duration}</span>
+          </Badge>
         </div>
-        <Link to={path} className="mt-4 w-full">
-          <Button variant="default" size="sm" className="w-full group">
-            Start Experiment
-            <ChevronRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-          </Button>
-        </Link>
-      </div>
-    </div>
+        <CardHeader>
+          <div className="flex items-center justify-between">
+            <Badge variant="outline">{category}</Badge>
+            <span className="text-sm text-muted-foreground">{duration}</span>
+          </div>
+          <h3 className="font-semibold">{title}</h3>
+          <CardDescription>{description}</CardDescription>
+        </CardHeader>
+      </Link>
+    </Card>
   );
 }
