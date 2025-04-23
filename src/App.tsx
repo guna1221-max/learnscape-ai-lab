@@ -10,6 +10,7 @@ import PhysicsLab from "./pages/PhysicsLab";
 import BiologyLab from "./pages/BiologyLab";
 import TutorPage from "./pages/TutorPage";
 import NotFound from "./pages/NotFound";
+import "./App.css";
 
 const queryClient = new QueryClient();
 
