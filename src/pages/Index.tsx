@@ -68,7 +68,7 @@ const Index = () => {
           <div className="text-center space-y-4">
             <School className="h-16 w-16 mx-auto text-primary mb-2" />
             <h1 className="text-4xl font-bold tracking-tight">
-              LearnScape<span className="text-primary">AI</span> Lab
+              Creative<span className="text-primary">thinkers</span> Lab
             </h1>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
               Interactive simulations and AI-powered tutoring for Physics and Biology experiments
@@ -179,7 +179,7 @@ const Index = () => {
           <div className="flex items-center gap-2">
             <School className="h-5 w-5 text-primary" />
             <span className="text-sm font-medium">
-              LearnScape<span className="text-primary">AI</span> Lab
+              Creative<span className="text-primary">thinkers</span> Lab
             </span>
           </div>
           <div className="text-sm text-muted-foreground">
