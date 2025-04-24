@@ -14,7 +14,7 @@ export function Navbar() {
         <div className="flex items-center gap-2">
           <School className="h-6 w-6 text-primary" />
           <Link to="/" className="text-xl font-bold tracking-tighter">
-            LearnScape<span className="text-primary">AI</span> Lab
+            Creative<span className="text-primary">thinkers</span> Lab
           </Link>
         </div>
         
