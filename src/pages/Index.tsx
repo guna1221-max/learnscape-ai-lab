@@ -5,7 +5,7 @@ import { Navbar } from '@/components/layout/Navbar';
 import { ExperimentCard } from '@/components/experiments/ExperimentCard';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { School, FlaskConical, Microscope, BookOpen } from 'lucide-react';
+import { School, FlaskConical, Microscope, BookOpen, Beaker } from 'lucide-react';
 
 const Index = () => {
   const [activeTab, setActiveTab] = useState('all');
@@ -51,6 +51,16 @@ const Index = () => {
       difficulty: 'Advanced' as const,
       duration: '30 minutes',
       path: '/biology'
+    },
+    {
+      id: '5',
+      title: 'Chemical Reactions',
+      description: 'Investigate reaction rates and the factors affecting chemical kinetics in this interactive simulation.',
+      imageUrl: 'https://images.unsplash.com/photo-1603126857599-f6e157fa2fe6?q=80&w=1000',
+      category: 'Chemistry',
+      difficulty: 'Intermediate' as const,
+      duration: '20 minutes',
+      path: '/chemistry'
     }
   ];
   
@@ -71,13 +81,19 @@ const Index = () => {
               Creative<span className="text-primary">thinkers</span> Lab
             </h1>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Interactive simulations and AI-powered tutoring for Physics and Biology experiments
+              Interactive simulations and AI-powered tutoring for Physics, Chemistry, and Biology experiments
             </p>
-            <div className="flex justify-center gap-4 mt-6">
+            <div className="flex flex-wrap justify-center gap-4 mt-6">
               <Button asChild size="lg" className="gap-2">
                 <Link to="/physics">
                   <FlaskConical className="h-5 w-5" />
                   Physics Lab
+                </Link>
+              </Button>
+              <Button asChild size="lg" variant="outline" className="gap-2">
+                <Link to="/chemistry">
+                  <Beaker className="h-5 w-5" />
+                  Chemistry Lab
                 </Link>
               </Button>
               <Button asChild size="lg" variant="outline" className="gap-2">
@@ -119,6 +135,7 @@ const Index = () => {
             <TabsList className="mb-6">
               <TabsTrigger value="all">All Experiments</TabsTrigger>
               <TabsTrigger value="physics">Physics</TabsTrigger>
+              <TabsTrigger value="chemistry">Chemistry</TabsTrigger>
               <TabsTrigger value="biology">Biology</TabsTrigger>
             </TabsList>
             

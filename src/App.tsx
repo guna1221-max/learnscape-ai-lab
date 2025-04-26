@@ -8,6 +8,7 @@ import { ThemeProvider } from "@/components/theme/ThemeProvider";
 import Index from "./pages/Index";
 import PhysicsLab from "./pages/PhysicsLab";
 import BiologyLab from "./pages/BiologyLab";
+import ChemistryLab from "./pages/ChemistryLab";
 import TutorPage from "./pages/TutorPage";
 import NotFound from "./pages/NotFound";
 import "./App.css";
@@ -25,6 +26,7 @@ const App = () => (
             <Route path="/" element={<Index />} />
             <Route path="/physics" element={<PhysicsLab />} />
             <Route path="/biology" element={<BiologyLab />} />
+            <Route path="/chemistry" element={<ChemistryLab />} />
             <Route path="/tutor" element={<TutorPage />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
