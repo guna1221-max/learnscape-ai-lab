@@ -5,7 +5,8 @@ import { SimulationController } from '@/components/simulations/SimulationControl
 import { BHCurveSimulation } from '@/components/simulations/physics/BHCurveSimulation';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Magnet, Book, Lightbulb, FlaskConical, ListChecks, CircleDashed } from 'lucide-react';
+import { Magnet, Book, Lightbulb, FlaskConical, ListChecks, CircleDashed, AlertTriangle } from 'lucide-react';
+import { Alert, AlertDescription } from '@/components/ui/alert';
 
 const BHCurveLab = () => {
   const [isRunning, setIsRunning] = useState<boolean>(false);
@@ -34,12 +35,19 @@ const BHCurveLab = () => {
           </p>
         </div>
         
+        <Alert className="mb-4 bg-yellow-50 border-yellow-200">
+          <AlertTriangle className="h-4 w-4 text-yellow-600" />
+          <AlertDescription className="text-yellow-800">
+            This virtual laboratory equipment simulates real-world ferromagnetic hysteresis analysis. Remember to turn on the power supply before starting measurements.
+          </AlertDescription>
+        </Alert>
+        
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
           <div className="lg:col-span-2">
             <SimulationController 
               type="physics"
-              title="B-H Curve & Hysteresis Simulation"
-              description="Observe how magnetic materials respond to changing magnetic field intensity"
+              title="B-H Curve & Hysteresis Laboratory"
+              description="Using virtual magnetometer and fluxmeter to study ferromagnetic materials"
               simulationType="bhcurve"
               isRunning={isRunning}
               onToggle={handleToggle}
@@ -120,24 +128,26 @@ const BHCurveLab = () => {
               <TabsContent value="procedure" className="p-4 border rounded-md mt-2 space-y-4">
                 <div className="space-y-4">
                   <div>
-                    <h3 className="font-medium">Experiment Procedure</h3>
+                    <h3 className="font-medium">Laboratory Procedure</h3>
                     <ol className="text-sm mt-2 list-decimal pl-5 space-y-2">
-                      <li>Start the simulation by pressing the "Start" button</li>
-                      <li>Observe the initial B-H curve with the default current setting (40A)</li>
-                      <li>Toggle between iron core and air core to observe different magnetic behaviors</li>
-                      <li>Switch to Advanced Settings and enable "Show Hysteresis Loop" (only available with iron core)</li>
-                      <li>Note the differences in the forward and reverse magnetization paths</li>
-                      <li>Adjust the current intensity to see how it affects the hysteresis loop shape</li>
-                      <li>Reset the hysteresis cycle to observe its regeneration</li>
+                      <li><strong>Setup Equipment:</strong> First, power on the system using the POWER ON button in the power supply unit</li>
+                      <li><strong>Material Selection:</strong> Choose between iron core (ferromagnetic) and air core using the toggle switch</li>
+                      <li><strong>Set Current:</strong> Adjust the current intensity using the slider (start with 40A)</li>
+                      <li><strong>Begin Measurement:</strong> Press the "Start" button to begin recording data</li>
+                      <li><strong>Observe B-H Curve:</strong> Watch the oscilloscope display as it plots the relationship between H and B</li>
+                      <li><strong>Enable Hysteresis Loop:</strong> With iron core selected, turn on the "Hysteresis Loop" toggle</li>
+                      <li><strong>Analyze Loop Shape:</strong> Observe the differences in forward and reverse magnetization paths</li>
+                      <li><strong>Reset and Repeat:</strong> Use the "Reset Hysteresis Cycle" button to perform multiple measurements</li>
+                      <li><strong>Safety Procedure:</strong> When finished, power off the equipment using the POWER OFF button</li>
                     </ol>
                   </div>
                   
                   <div>
                     <h3 className="font-medium flex items-center gap-2">
-                      <ListChecks className="h-4 w-4" /> Observations
+                      <ListChecks className="h-4 w-4" /> Data Collection
                     </h3>
                     <p className="text-sm mt-1">
-                      In your observations, note:
+                      In your lab report, record and analyze:
                     </p>
                     <ul className="text-sm mt-1 list-disc pl-5 space-y-1">
                       <li>The initial slope of the B-H curve (initial permeability)</li>
@@ -146,6 +156,7 @@ const BHCurveLab = () => {
                       <li>The width of the hysteresis loop (related to energy loss)</li>
                       <li>The residual magnetization when H = 0 (remanence)</li>
                       <li>The field required to reduce B to zero (coercivity)</li>
+                      <li>Temperature changes during extended operation (related to power losses)</li>
                     </ul>
                   </div>
                 </div>

@@ -17,7 +17,8 @@ import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
-import { Magnet, CircleDashed } from "lucide-react";
+import { Magnet, CircleDashed, Power, Zap, FlaskConical, Gauge, ChevronDown, ChevronUp } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 // Register Chart.js components
 ChartJS.register(
@@ -48,19 +49,45 @@ export function BHCurveSimulation({ isRunning = false }: BHCurveSimulationProps)
   });
   const animationRef = useRef<number | null>(null);
   const [cycleCompleted, setCycleCompleted] = useState<boolean>(false);
+  const [powerStatus, setPowerStatus] = useState<boolean>(false);
+  const [equipmentExpanded, setEquipmentExpanded] = useState<boolean>(true);
+  const [measurementStatus, setMeasurementStatus] = useState<string>("Idle");
+  const [coilTemperature, setCoilTemperature] = useState<number>(22); // room temp in Celsius
   
   // Generate B-H curve data
   useEffect(() => {
     if (isRunning) {
-      generateBHCurveData();
-      if (showHysteresis && ironCore) {
-        generateHysteresisData();
+      if (powerStatus) {
+        generateBHCurveData();
+        if (showHysteresis && ironCore) {
+          generateHysteresisData();
+          setMeasurementStatus("Recording hysteresis loop...");
+        } else {
+          setMeasurementStatus("Measuring B-H relationship...");
+        }
+        animationRef.current = requestAnimationFrame(animate);
+        
+        // Simulate coil heating due to current
+        const heatingInterval = setInterval(() => {
+          setCoilTemperature(prev => {
+            const maxTemp = 22 + currentIntensity * 0.4;
+            return prev < maxTemp ? prev + 0.2 : maxTemp;
+          });
+        }, 1000);
+        
+        return () => {
+          clearInterval(heatingInterval);
+        };
+      } else {
+        setMeasurementStatus("Power off. Turn on power to begin measurement.");
       }
-      animationRef.current = requestAnimationFrame(animate);
-    } else if (animationRef.current) {
-      cancelAnimationFrame(animationRef.current);
-      animationRef.current = null;
-      setCycleCompleted(false);
+    } else {
+      if (animationRef.current) {
+        cancelAnimationFrame(animationRef.current);
+        animationRef.current = null;
+        setCycleCompleted(false);
+        setMeasurementStatus("Measurement paused.");
+      }
     }
 
     return () => {
@@ -69,7 +96,7 @@ export function BHCurveSimulation({ isRunning = false }: BHCurveSimulationProps)
         animationRef.current = null;
       }
     };
-  }, [isRunning, currentIntensity, ironCore, showHysteresis]);
+  }, [isRunning, currentIntensity, ironCore, showHysteresis, powerStatus]);
 
   const generateBHCurveData = () => {
     // H values (magnetic field intensity) range
@@ -183,6 +210,7 @@ export function BHCurveSimulation({ isRunning = false }: BHCurveSimulationProps)
     });
     
     setCycleCompleted(true);
+    setMeasurementStatus("Hysteresis loop measurement complete.");
   };
 
   const animate = () => {
@@ -196,8 +224,40 @@ export function BHCurveSimulation({ isRunning = false }: BHCurveSimulationProps)
       forward: {h: [], b: []},
       reverse: {h: [], b: []}
     });
-    if (isRunning) {
-      generateHysteresisData();
+    if (isRunning && powerStatus) {
+      setMeasurementStatus("Resetting measurement...");
+      setTimeout(() => {
+        generateHysteresisData();
+        setMeasurementStatus("New hysteresis loop recorded.");
+      }, 1000);
+    }
+  };
+
+  const togglePower = () => {
+    const newPowerStatus = !powerStatus;
+    setPowerStatus(newPowerStatus);
+    
+    if (!newPowerStatus) {
+      // Power turned off
+      setMeasurementStatus("Power off. System cooling down.");
+      
+      // Simulate cooling down
+      const coolingInterval = setInterval(() => {
+        setCoilTemperature(prev => {
+          const newTemp = prev - 0.5;
+          if (newTemp <= 22) {
+            clearInterval(coolingInterval);
+            return 22;
+          }
+          return newTemp;
+        });
+      }, 1000);
+    } else {
+      // Power turned on
+      setMeasurementStatus("Power on. System initializing...");
+      setTimeout(() => {
+        setMeasurementStatus("Ready for measurement.");
+      }, 2000);
     }
   };
 
@@ -265,24 +325,78 @@ export function BHCurveSimulation({ isRunning = false }: BHCurveSimulationProps)
 
   return (
     <div className="p-4 space-y-6">
-      <div className="h-[300px]">
-        <Line options={chartOptions} data={chartData} />
-      </div>
-      
-      <div className="grid gap-6">
-        <Card>
-          <CardContent className="pt-6">
-            <Tabs defaultValue="basic" className="w-full">
-              <TabsList className="grid grid-cols-2 w-full mb-4">
-                <TabsTrigger value="basic">Basic Settings</TabsTrigger>
-                <TabsTrigger value="advanced">Advanced Settings</TabsTrigger>
-              </TabsList>
+      {/* Laboratory Equipment Panel */}
+      <Card className="border-2 border-gray-300 shadow-md">
+        <div 
+          className="flex justify-between items-center p-3 bg-slate-100 cursor-pointer"
+          onClick={() => setEquipmentExpanded(!equipmentExpanded)}
+        >
+          <div className="flex items-center gap-2">
+            <FlaskConical className="h-5 w-5 text-primary" />
+            <h3 className="font-bold">Laboratory Equipment</h3>
+          </div>
+          {equipmentExpanded ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
+        </div>
+        
+        {equipmentExpanded && (
+          <CardContent className="p-4">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              {/* Power Supply Unit */}
+              <div className="bg-slate-800 rounded-md p-4 text-white shadow-inner">
+                <div className="flex justify-between items-center mb-3">
+                  <h4 className="text-sm font-medium">Power Supply Unit</h4>
+                  <div className={`h-2 w-2 rounded-full ${powerStatus ? 'bg-green-500 animate-pulse' : 'bg-red-500'}`}></div>
+                </div>
+                
+                <div className="flex items-center justify-between mb-4">
+                  <Button 
+                    variant={powerStatus ? "destructive" : "default"}
+                    size="sm"
+                    className="w-full flex items-center justify-center gap-2"
+                    onClick={togglePower}
+                  >
+                    <Power className="h-4 w-4" />
+                    {powerStatus ? "POWER OFF" : "POWER ON"}
+                  </Button>
+                </div>
+                
+                <div className="space-y-3">
+                  <div>
+                    <div className="flex justify-between text-xs mb-1">
+                      <span>Current (A)</span>
+                      <span className="font-mono">{currentIntensity.toFixed(1)}</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Zap className="h-3 w-3 text-yellow-400" />
+                      <div className="bg-black w-full h-8 rounded flex items-center px-2 font-mono text-green-400 text-lg">
+                        {currentIntensity.toFixed(1)}
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div>
+                    <div className="flex justify-between text-xs mb-1">
+                      <span>Voltage (V)</span>
+                      <span className="font-mono">{(currentIntensity * 0.24).toFixed(1)}</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Zap className="h-3 w-3 text-yellow-400" />
+                      <div className="bg-black w-full h-8 rounded flex items-center px-2 font-mono text-green-400 text-lg">
+                        {(currentIntensity * 0.24).toFixed(1)}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
               
-              <TabsContent value="basic" className="space-y-4">
+              {/* Control Panel */}
+              <div className="bg-slate-200 rounded-md p-4 shadow-inner space-y-4">
+                <h4 className="text-sm font-medium border-b pb-1">Control Panel</h4>
+                
                 <div className="space-y-2">
                   <div className="flex justify-between">
-                    <Label htmlFor="current-intensity">Current Intensity</Label>
-                    <span className="text-sm text-muted-foreground">{currentIntensity} A</span>
+                    <Label htmlFor="current-intensity" className="text-xs">Current Intensity</Label>
+                    <span className="text-xs font-mono bg-white px-2 rounded">{currentIntensity} A</span>
                   </div>
                   <Slider
                     id="current-intensity"
@@ -291,61 +405,134 @@ export function BHCurveSimulation({ isRunning = false }: BHCurveSimulationProps)
                     step={5}
                     value={[currentIntensity]}
                     onValueChange={(value) => setCurrentIntensity(value[0])}
+                    disabled={!powerStatus}
+                    className={!powerStatus ? "opacity-50" : ""}
                   />
                 </div>
                 
-                <div className="flex items-center justify-between space-x-2">
+                <div className="flex items-center justify-between space-x-2 border-t pt-2">
                   <div className="flex items-center space-x-2">
                     <Magnet className="h-4 w-4 text-primary" />
-                    <Label htmlFor="iron-core">Iron Core</Label>
+                    <Label htmlFor="iron-core" className="text-xs">Iron Core</Label>
                   </div>
                   <Switch
                     id="iron-core"
                     checked={ironCore}
                     onCheckedChange={setIronCore}
+                    disabled={!powerStatus}
                   />
                 </div>
-              </TabsContent>
-              
-              <TabsContent value="advanced" className="space-y-4">
+                
                 <div className="flex items-center justify-between space-x-2">
                   <div className="flex items-center space-x-2">
                     <CircleDashed className="h-4 w-4 text-primary" />
-                    <Label htmlFor="show-hysteresis">Show Hysteresis Loop</Label>
+                    <Label htmlFor="show-hysteresis" className="text-xs">Hysteresis Loop</Label>
                   </div>
                   <Switch
                     id="show-hysteresis"
                     checked={showHysteresis}
                     onCheckedChange={(checked) => {
                       setShowHysteresis(checked);
-                      if (checked && ironCore && !cycleCompleted) {
+                      if (checked && ironCore && !cycleCompleted && powerStatus) {
                         generateHysteresisData();
                       }
                     }}
-                    disabled={!ironCore}
+                    disabled={!ironCore || !powerStatus}
                   />
                 </div>
                 
-                {showHysteresis && ironCore && (
+                {showHysteresis && ironCore && powerStatus && (
                   <Button 
                     variant="outline" 
                     size="sm" 
                     onClick={resetHysteresis} 
-                    className="w-full"
+                    className="w-full text-xs"
                   >
                     Reset Hysteresis Cycle
                   </Button>
                 )}
+              </div>
+              
+              {/* System Status */}
+              <div className="bg-white border rounded-md p-4 shadow-inner">
+                <h4 className="text-sm font-medium border-b pb-1">System Status</h4>
                 
-                {showHysteresis && !ironCore && (
-                  <p className="text-xs text-muted-foreground italic">
-                    Hysteresis only occurs in ferromagnetic materials. Enable "Iron Core" to see the effect.
-                  </p>
-                )}
-              </TabsContent>
-            </Tabs>
+                <div className="space-y-3 pt-2">
+                  <div>
+                    <div className="flex justify-between text-xs mb-1">
+                      <span>Measurement Status</span>
+                    </div>
+                    <div className="bg-slate-100 p-2 rounded text-xs">
+                      <span className={cn(
+                        "font-mono",
+                        measurementStatus.includes("complete") && "text-green-600",
+                        measurementStatus.includes("error") && "text-red-600"
+                      )}>
+                        {measurementStatus}
+                      </span>
+                    </div>
+                  </div>
+                  
+                  <div>
+                    <div className="flex justify-between text-xs mb-1">
+                      <span>Coil Temperature</span>
+                      <span className={cn(
+                        "font-mono",
+                        coilTemperature > 45 && "text-red-600",
+                        coilTemperature > 35 && coilTemperature <= 45 && "text-yellow-600"
+                      )}>
+                        {coilTemperature.toFixed(1)}°C
+                      </span>
+                    </div>
+                    <div className="w-full bg-slate-200 rounded-full h-2">
+                      <div 
+                        className={cn(
+                          "h-2 rounded-full",
+                          coilTemperature > 45 ? "bg-red-500" : 
+                          coilTemperature > 35 ? "bg-yellow-500" : 
+                          "bg-green-500"
+                        )} 
+                        style={{ width: `${(coilTemperature - 20) * 100 / 50}%` }}
+                      ></div>
+                    </div>
+                  </div>
+                  
+                  <div>
+                    <div className="flex justify-between text-xs mb-1">
+                      <span>System Power</span>
+                      <span className="font-mono">{powerStatus ? "ON" : "OFF"}</span>
+                    </div>
+                    <div className="border p-2 rounded bg-slate-100 flex items-center gap-2">
+                      <div className={`h-3 w-3 rounded-full ${powerStatus ? 'bg-green-500 animate-pulse' : 'bg-red-500'}`}></div>
+                      <span className="text-xs font-medium">{powerStatus ? "System Active" : "System Inactive"}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </CardContent>
-        </Card>
+        )}
+      </Card>
+      
+      {/* Oscilloscope/Chart Display */}
+      <div className="bg-black p-4 rounded-lg border border-gray-700 shadow-lg">
+        <div className="flex justify-between items-center mb-2 text-green-500 text-xs border-b border-gray-700 pb-2">
+          <div className="flex items-center gap-1">
+            <Gauge className="h-4 w-4" />
+            <span>B-H CURVE OSCILLOSCOPE</span>
+          </div>
+          <span className="font-mono">{powerStatus ? "RECORDING" : "STANDBY"}</span>
+        </div>
+        
+        <div className={`h-[300px] ${!powerStatus && 'opacity-50 bg-gray-900'}`}>
+          <Line options={chartOptions} data={chartData} />
+        </div>
+        
+        <div className="flex justify-between text-xs text-gray-400 mt-2 pt-2 border-t border-gray-700">
+          <span>Sweep: 1s/div</span>
+          <span>Sampling: 100Hz</span>
+          <span>Trigger: Auto</span>
+        </div>
       </div>
     </div>
   );
