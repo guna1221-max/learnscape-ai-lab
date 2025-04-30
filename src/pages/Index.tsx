@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { Navbar } from '@/components/layout/Navbar';
 import { ExperimentCard } from '@/components/experiments/ExperimentCard';
 import { NewtonRingsCard } from '@/components/experiments/NewtonRingsCard';
+import { TorsionalPendulumCard } from '@/components/experiments/TorsionalPendulumCard';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { School, FlaskConical, Microscope, BookOpen, Beaker } from 'lucide-react';
@@ -156,6 +157,8 @@ const Index = () => {
                 ))}
                 {/* Add Newton's Rings Card directly to ensure it appears */}
                 <NewtonRingsCard />
+                {/* Add Torsional Pendulum Card */}
+                <TorsionalPendulumCard />
               </div>
             </TabsContent>
           </Tabs>
@@ -212,4 +215,3 @@ const Index = () => {
 };
 
 export default Index;
-
