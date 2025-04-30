@@ -6,6 +6,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { PendulumSimulation } from './physics/PendulumSimulation';
 import { NewtonRingsSimulation } from './physics/NewtonRingsSimulation'; 
 import { ChemicalReactionSimulation } from './chemistry/ChemicalReactionSimulation';
+import { SonometerSimulation } from './physics/SonometerSimulation';
 import { Play, Pause, RotateCcw, Download, Share } from 'lucide-react';
 import { toast } from '@/components/ui/use-toast';
 
@@ -17,6 +18,7 @@ interface SimulationControllerProps {
   isRunning?: boolean;
   onToggle?: () => void;
   onReset?: () => void;
+  children?: React.ReactNode;
 }
 
 export function SimulationController({ 
@@ -26,7 +28,8 @@ export function SimulationController({
   simulationType = 'default',
   isRunning = false,
   onToggle,
-  onReset
+  onReset,
+  children
 }: SimulationControllerProps) {
   const [internalIsRunning, setInternalIsRunning] = React.useState(false);
   const [simulationData, setSimulationData] = React.useState<any>(null);
@@ -83,10 +86,16 @@ export function SimulationController({
   };
   
   const renderSimulation = () => {
+    if (children) {
+      return children;
+    }
+
     switch (type) {
       case 'physics':
         if (simulationType === 'newtonRings') {
           return <NewtonRingsSimulation />;
+        } else if (simulationType === 'sonometer') {
+          return <SonometerSimulation isRunning={internalIsRunning} />;
         }
         return <PendulumSimulation />;
       case 'chemistry':
@@ -113,11 +122,9 @@ export function SimulationController({
       )}
       
       <CardContent className="space-y-4">
-        {!onToggle && !onReset && (
-          <div className="bg-card border rounded-lg overflow-hidden">
-            {renderSimulation()}
-          </div>
-        )}
+        <div className="bg-card border rounded-lg overflow-hidden">
+          {renderSimulation()}
+        </div>
         
         <div className="flex flex-wrap items-center gap-2 justify-between">
           <div className="flex gap-2">
@@ -161,7 +168,7 @@ export function SimulationController({
           </div>
         </div>
         
-        {!onToggle && !onReset && (
+        {(!onToggle && !onReset && !children) && (
           <Tabs defaultValue="settings" className="mt-6">
             <TabsList className="grid w-full grid-cols-3">
               <TabsTrigger value="settings">Settings</TabsTrigger>

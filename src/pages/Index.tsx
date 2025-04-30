@@ -5,6 +5,7 @@ import { Navbar } from '@/components/layout/Navbar';
 import { ExperimentCard } from '@/components/experiments/ExperimentCard';
 import { NewtonRingsCard } from '@/components/experiments/NewtonRingsCard';
 import { TorsionalPendulumCard } from '@/components/experiments/TorsionalPendulumCard';
+import { SonometerCard } from '@/components/experiments/SonometerCard';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { School, FlaskConical, Microscope, BookOpen, Beaker } from 'lucide-react';
@@ -155,10 +156,10 @@ const Index = () => {
                     path={experiment.path}
                   />
                 ))}
-                {/* Add Newton's Rings Card directly to ensure it appears */}
+                {/* Add experiment cards directly to ensure they appear */}
                 <NewtonRingsCard />
-                {/* Add Torsional Pendulum Card */}
                 <TorsionalPendulumCard />
+                <SonometerCard />
               </div>
             </TabsContent>
           </Tabs>
