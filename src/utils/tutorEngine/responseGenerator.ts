@@ -1,4 +1,3 @@
-
 import { processQuery } from './nlpProcessor';
 
 // Knowledge base for educational content
@@ -24,6 +23,13 @@ const knowledgeBase = {
       concept: "Waves transfer energy from one place to another without transferring matter. Key types include mechanical waves (requiring a medium) and electromagnetic waves (which don't).",
       properties: "Waves are characterized by amplitude, wavelength, frequency, period, speed, and direction of propagation.",
       interference: "When two waves meet, they can undergo constructive interference (amplitudes add) or destructive interference (amplitudes subtract)."
+    },
+    newtons_rings: {
+      concept: "Newton's rings are circular interference patterns that appear when a spherical surface is placed on a flat surface, creating a thin air film that varies in thickness from the center outwards.",
+      formula: "The condition for bright rings (constructive interference) is 2t = (m+1/2)λ, and for dark rings (destructive interference) is 2t = mλ, where t is the thickness of the air gap, m is an integer, and λ is the wavelength of light.",
+      radius_formula: "The radius of the mth dark ring is given by r = √(mλR), where R is the radius of curvature of the lens.",
+      applications: "Newton's rings are used for measuring the wavelength of light, testing optical surfaces for flatness, and determining the refractive index of liquids.",
+      experiment: "To observe Newton's rings, place a convex lens on a flat glass plate and illuminate it with monochromatic light. The pattern of alternating bright and dark rings will be visible."
     }
   },
   chemistry: {

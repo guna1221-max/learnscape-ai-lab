@@ -9,6 +9,7 @@ import Index from "./pages/Index";
 import PhysicsLab from "./pages/PhysicsLab";
 import BiologyLab from "./pages/BiologyLab";
 import ChemistryLab from "./pages/ChemistryLab";
+import NewtonRingsLab from "./pages/NewtonRingsLab";
 import TutorPage from "./pages/TutorPage";
 import NotFound from "./pages/NotFound";
 import "./App.css";
@@ -25,6 +26,7 @@ const App = () => (
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/physics" element={<PhysicsLab />} />
+            <Route path="/physics/newtons-rings" element={<NewtonRingsLab />} />
             <Route path="/biology" element={<BiologyLab />} />
             <Route path="/chemistry" element={<ChemistryLab />} />
             <Route path="/tutor" element={<TutorPage />} />

@@ -1,9 +1,9 @@
-
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { PendulumSimulation } from './physics/PendulumSimulation';
+import { NewtonRingsSimulation } from './physics/NewtonRingsSimulation'; 
 import { ChemicalReactionSimulation } from './chemistry/ChemicalReactionSimulation';
 import { Play, Pause, RotateCcw, Download, Share } from 'lucide-react';
 import { toast } from '@/components/ui/use-toast';
@@ -12,9 +12,15 @@ interface SimulationControllerProps {
   type: 'physics' | 'chemistry' | 'biology';
   title: string;
   description?: string;
+  simulationType?: string;
 }
 
-export function SimulationController({ type, title, description }: SimulationControllerProps) {
+export function SimulationController({ 
+  type, 
+  title, 
+  description, 
+  simulationType = 'default'
+}: SimulationControllerProps) {
   const [isRunning, setIsRunning] = useState(false);
   const [simulationData, setSimulationData] = useState<any>(null);
   
@@ -63,6 +69,9 @@ export function SimulationController({ type, title, description }: SimulationCon
   const renderSimulation = () => {
     switch (type) {
       case 'physics':
+        if (simulationType === 'newtonRings') {
+          return <NewtonRingsSimulation />;
+        }
         return <PendulumSimulation />;
       case 'chemistry':
         return <ChemicalReactionSimulation />;
