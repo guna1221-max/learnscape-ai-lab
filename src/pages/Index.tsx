@@ -6,6 +6,7 @@ import { ExperimentCard } from '@/components/experiments/ExperimentCard';
 import { NewtonRingsCard } from '@/components/experiments/NewtonRingsCard';
 import { TorsionalPendulumCard } from '@/components/experiments/TorsionalPendulumCard';
 import { SonometerCard } from '@/components/experiments/SonometerCard';
+import { BHCurveCard } from '@/components/experiments/BHCurveCard';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { School, FlaskConical, Microscope, BookOpen, Beaker } from 'lucide-react';
@@ -160,6 +161,7 @@ const Index = () => {
                 <NewtonRingsCard />
                 <TorsionalPendulumCard />
                 <SonometerCard />
+                <BHCurveCard />
               </div>
             </TabsContent>
           </Tabs>

@@ -12,6 +12,7 @@ import ChemistryLab from "./pages/ChemistryLab";
 import NewtonRingsLab from "./pages/NewtonRingsLab";
 import TorsionalPendulumLab from "./pages/TorsionalPendulumLab";
 import SonometerLab from "./pages/SonometerLab";
+import BHCurveLab from "./pages/BHCurveLab";
 import TutorPage from "./pages/TutorPage";
 import NotFound from "./pages/NotFound";
 import "./App.css";
@@ -31,6 +32,7 @@ const App = () => (
             <Route path="/physics/newtons-rings" element={<NewtonRingsLab />} />
             <Route path="/physics/torsional-pendulum" element={<TorsionalPendulumLab />} />
             <Route path="/physics/sonometer" element={<SonometerLab />} />
+            <Route path="/physics/bh-curve" element={<BHCurveLab />} />
             <Route path="/biology" element={<BiologyLab />} />
             <Route path="/chemistry" element={<ChemistryLab />} />
             <Route path="/tutor" element={<TutorPage />} />

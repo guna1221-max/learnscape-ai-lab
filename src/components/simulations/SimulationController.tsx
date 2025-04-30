@@ -7,6 +7,7 @@ import { PendulumSimulation } from './physics/PendulumSimulation';
 import { NewtonRingsSimulation } from './physics/NewtonRingsSimulation'; 
 import { ChemicalReactionSimulation } from './chemistry/ChemicalReactionSimulation';
 import { SonometerSimulation } from './physics/SonometerSimulation';
+import { BHCurveSimulation } from './physics/BHCurveSimulation';
 import { Play, Pause, RotateCcw, Download, Share } from 'lucide-react';
 import { toast } from '@/components/ui/use-toast';
 
@@ -96,6 +97,8 @@ export function SimulationController({
           return <NewtonRingsSimulation />;
         } else if (simulationType === 'sonometer') {
           return <SonometerSimulation isRunning={internalIsRunning} />;
+        } else if (simulationType === 'bhcurve') {
+          return <BHCurveSimulation isRunning={internalIsRunning} />;
         }
         return <PendulumSimulation />;
       case 'chemistry':
