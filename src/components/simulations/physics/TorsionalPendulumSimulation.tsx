@@ -56,6 +56,7 @@ export function TorsionalPendulumSimulation() {
     setTime(0);
     setAngle(initialAngleRadians);
     setAngularVelocity(0);
+    setIsRunning(false);
     
     // Draw initial state
     drawPendulum(initialAngleRadians);
@@ -75,6 +76,21 @@ export function TorsionalPendulumSimulation() {
     
     setIsRunning(!isRunning);
   };
+  
+  // Effect to handle animation frame updates when isRunning changes
+  useEffect(() => {
+    if (isRunning && animationRef.current === null) {
+      pendulumData.current.lastTimestamp = performance.now();
+      animationRef.current = requestAnimationFrame(updateSimulation);
+    }
+    
+    return () => {
+      if (animationRef.current !== null) {
+        cancelAnimationFrame(animationRef.current);
+        animationRef.current = null;
+      }
+    };
+  }, [isRunning]);
   
   // Update simulation state
   const updateSimulation = (timestamp: number) => {
@@ -115,7 +131,7 @@ export function TorsionalPendulumSimulation() {
     
     pendulumData.current.lastTimestamp = timestamp;
     
-    // Continue animation loop
+    // Continue animation loop if still running
     if (isRunning) {
       animationRef.current = requestAnimationFrame(updateSimulation);
     }
