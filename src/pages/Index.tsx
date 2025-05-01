@@ -14,13 +14,13 @@ import { School, FlaskConical, Microscope, BookOpen, Beaker } from 'lucide-react
 const Index = () => {
   const [activeTab, setActiveTab] = useState('all');
   
-  // Sample experiment data
+  // Sample experiment data with updated original images
   const experiments = [
     {
       id: '1',
       title: 'Simple Pendulum',
       description: 'Explore the physics of pendulum motion and how parameters like length and gravity affect the period.',
-      imageUrl: 'https://images.unsplash.com/photo-1535378917042-10a22c95931a?q=80&w=1000',
+      imageUrl: '/images/experiments/simple-pendulum-setup.jpg',
       category: 'Physics',
       difficulty: 'Beginner' as const,
       duration: '15 minutes',
@@ -30,7 +30,7 @@ const Index = () => {
       id: '2',
       title: 'Cell Membrane Transport',
       description: 'Visualize how molecules move across cell membranes through diffusion and active transport.',
-      imageUrl: 'https://images.unsplash.com/photo-1576086387438-486c6d5a1bb8?q=80&w=1000',
+      imageUrl: '/images/experiments/cell-membrane-transport-setup.jpg',
       category: 'Biology',
       difficulty: 'Intermediate' as const,
       duration: '20 minutes',
@@ -40,7 +40,7 @@ const Index = () => {
       id: '3',
       title: 'Wave Interference',
       description: 'Investigate how waves interact with each other through constructive and destructive interference.',
-      imageUrl: 'https://images.unsplash.com/photo-1608108707926-8f14abd56336?q=80&w=1000',
+      imageUrl: '/images/experiments/wave-interference-setup.jpg',
       category: 'Physics',
       difficulty: 'Advanced' as const,
       duration: '25 minutes',
@@ -50,7 +50,7 @@ const Index = () => {
       id: '4',
       title: 'DNA Replication',
       description: 'Explore the process of DNA replication and the enzymes involved in creating new DNA strands.',
-      imageUrl: 'https://images.unsplash.com/photo-1584555613483-2a0e0a1bb911?q=80&w=1000',
+      imageUrl: '/images/experiments/dna-replication-setup.jpg',
       category: 'Biology',
       difficulty: 'Advanced' as const,
       duration: '30 minutes',
@@ -60,7 +60,7 @@ const Index = () => {
       id: '5',
       title: 'Chemical Reactions',
       description: 'Investigate reaction rates and the factors affecting chemical kinetics in this interactive simulation.',
-      imageUrl: 'https://images.unsplash.com/photo-1603126857599-f6e157fa2fe6?q=80&w=1000',
+      imageUrl: '/images/experiments/chemical-reactions-setup.jpg',
       category: 'Chemistry',
       difficulty: 'Intermediate' as const,
       duration: '20 minutes',
