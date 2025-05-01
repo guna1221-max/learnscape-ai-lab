@@ -5,11 +5,11 @@ export function NewtonRingsCard() {
   return (
     <ExperimentCard
       title="Newton's Rings"
-      description="Explore wave interference patterns with this classic optics experiment"
+      description="Determine the wavelength of sodium light and radius of curvature of plano-convex lens"
       imageUrl="/images/experiments/newtons-rings.jpg"
-      category="Optics"
+      category="Physics"
       difficulty="Intermediate"
-      duration="30-45 min"
+      duration="45 min"
       path="/physics/newtons-rings"
     />
   );

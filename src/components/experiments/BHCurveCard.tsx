@@ -5,11 +5,11 @@ export function BHCurveCard() {
   return (
     <ExperimentCard
       title="B-H Curve & Hysteresis"
-      description="Use virtual magnetic laboratory equipment to study ferromagnetic hysteresis effects"
+      description="Plot B-H curve and determine hysteresis loss using a digital storage oscilloscope and function generator"
       imageUrl="/images/experiments/bh-curve.jpg"
-      category="Physics"
+      category="BEEE"
       difficulty="Intermediate"
-      duration="25 minutes"
+      duration="50 minutes"
       path="/physics/bh-curve"
     />
   );

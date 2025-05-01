@@ -5,11 +5,11 @@ export function SonometerCard() {
   return (
     <ExperimentCard
       title="Sonometer Experiment"
-      description="Explore the principles of standing waves and resonance in vibrating strings"
+      description="Determine frequency of AC supply and tension using transverse vibrations of stretched string"
       imageUrl="/images/experiments/sonometer.jpg"
       category="Physics"
       difficulty="Intermediate"
-      duration="25 minutes"
+      duration="45 minutes"
       path="/physics/sonometer"
     />
   );
