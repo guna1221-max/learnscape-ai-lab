@@ -5,7 +5,7 @@ import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
-import { Microscope, Diameter, Circle, CircleDashed, ArrowsExpand } from 'lucide-react';
+import { Microscope, Diameter, Circle, CircleDashed, ArrowsUpFromLine } from 'lucide-react';
 import { Switch } from '@/components/ui/switch';
 import { Toggle } from '@/components/ui/toggle';
 import { Badge } from '@/components/ui/badge';
@@ -573,7 +573,7 @@ export function NewtonRingsSimulation() {
                     -
                   </Button>
                   <span className="flex items-center text-xs">
-                    <ArrowsExpand className="h-3 w-3 mr-1" /> {(zoomLevel * 100).toFixed(0)}%
+                    <ArrowsUpFromLine className="h-3 w-3 mr-1" /> {(zoomLevel * 100).toFixed(0)}%
                   </span>
                   <Button 
                     variant="ghost" 
