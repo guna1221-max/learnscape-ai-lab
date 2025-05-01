@@ -6,7 +6,7 @@ export function NewtonRingsCard() {
     <ExperimentCard
       title="Newton's Rings"
       description="Explore wave interference patterns with this classic optics experiment"
-      imageUrl="/images/experiments/newtons-rings-setup.jpg"
+      imageUrl="/images/experiments/newtons-rings.jpg"
       category="Optics"
       difficulty="Intermediate"
       duration="30-45 min"

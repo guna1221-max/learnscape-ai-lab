@@ -6,7 +6,7 @@ export function SonometerCard() {
     <ExperimentCard
       title="Sonometer Experiment"
       description="Explore the principles of standing waves and resonance in vibrating strings"
-      imageUrl="/images/experiments/sonometer-setup.jpg"
+      imageUrl="/images/experiments/sonometer.jpg"
       category="Physics"
       difficulty="Intermediate"
       duration="25 minutes"

@@ -6,7 +6,7 @@ export function TorsionalPendulumCard() {
     <ExperimentCard
       title="Torsional Pendulum"
       description="Explore rotational motion and oscillations with a torsional pendulum system and analyze the factors affecting its period."
-      imageUrl="/images/experiments/torsional-pendulum-setup.jpg"
+      imageUrl="/images/experiments/torsional-pendulum.jpg"
       category="Physics"
       difficulty="Intermediate"
       duration="20 minutes"
