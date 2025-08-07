@@ -9,7 +9,7 @@ import { SonometerCard } from '@/components/experiments/SonometerCard';
 import { BHCurveCard } from '@/components/experiments/BHCurveCard';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { School, FlaskConical, BookOpen, Beaker, Code } from 'lucide-react';
+import { School, FlaskConical, BookOpen, Code } from 'lucide-react';
 
 const Index = () => {
   const [activeTab, setActiveTab] = useState('all');
@@ -56,16 +56,6 @@ const Index = () => {
       duration: '30 minutes',
       path: '/algorithms'
     },
-    {
-      id: '5',
-      title: 'Chemical Reactions',
-      description: 'Investigate reaction rates and the factors affecting chemical kinetics in this interactive simulation.',
-      imageUrl: '/images/experiments/chemical-reactions-setup.jpg',
-      category: 'Chemistry',
-      difficulty: 'Intermediate' as const,
-      duration: '20 minutes',
-      path: '/chemistry'
-    }
   ];
   
   const filteredExperiments = activeTab === 'all' 
@@ -92,12 +82,6 @@ const Index = () => {
                 <Link to="/physics">
                   <FlaskConical className="h-5 w-5" />
                   Physics Lab
-                </Link>
-              </Button>
-              <Button asChild size="lg" variant="outline" className="gap-2">
-                <Link to="/chemistry">
-                  <Beaker className="h-5 w-5" />
-                  Chemistry Lab
                 </Link>
               </Button>
               <Button asChild size="lg" variant="outline" className="gap-2">
@@ -139,7 +123,7 @@ const Index = () => {
             <TabsList className="mb-6">
               <TabsTrigger value="all">All Experiments</TabsTrigger>
               <TabsTrigger value="physics">Physics</TabsTrigger>
-              <TabsTrigger value="chemistry">Chemistry</TabsTrigger>
+              
               <TabsTrigger value="algorithms">Algorithms</TabsTrigger>
             </TabsList>
             
