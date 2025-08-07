@@ -26,8 +26,8 @@ export function Navbar() {
           <Link to="/physics" className="text-sm font-medium transition-colors hover:text-primary">
             Physics Lab
           </Link>
-          <Link to="/biology" className="text-sm font-medium transition-colors hover:text-primary">
-            Biology Lab
+          <Link to="/algorithms" className="text-sm font-medium transition-colors hover:text-primary">
+            Algorithm Lab
           </Link>
           <Link to="/tutor" className="text-sm font-medium transition-colors hover:text-primary">
             AI Tutor
@@ -97,11 +97,11 @@ export function Navbar() {
               Physics Lab
             </Link>
             <Link 
-              to="/biology" 
+              to="/algorithms" 
               className="text-sm font-medium py-2 transition-colors hover:text-primary"
               onClick={() => setIsMenuOpen(false)}
             >
-              Biology Lab
+              Algorithm Lab
             </Link>
             <Link 
               to="/tutor" 

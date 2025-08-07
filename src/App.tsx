@@ -7,7 +7,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "@/components/theme/ThemeProvider";
 import Index from "./pages/Index";
 import PhysicsLab from "./pages/PhysicsLab";
-import BiologyLab from "./pages/BiologyLab";
+import AlgorithmLab from "./pages/AlgorithmLab";
 import ChemistryLab from "./pages/ChemistryLab";
 import NewtonRingsLab from "./pages/NewtonRingsLab";
 import TorsionalPendulumLab from "./pages/TorsionalPendulumLab";
@@ -33,7 +33,7 @@ const App = () => (
             <Route path="/physics/torsional-pendulum" element={<TorsionalPendulumLab />} />
             <Route path="/physics/sonometer" element={<SonometerLab />} />
             <Route path="/physics/bh-curve" element={<BHCurveLab />} />
-            <Route path="/biology" element={<BiologyLab />} />
+            <Route path="/algorithms" element={<AlgorithmLab />} />
             <Route path="/chemistry" element={<ChemistryLab />} />
             <Route path="/tutor" element={<TutorPage />} />
             <Route path="*" element={<NotFound />} />

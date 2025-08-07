@@ -9,7 +9,7 @@ import { SonometerCard } from '@/components/experiments/SonometerCard';
 import { BHCurveCard } from '@/components/experiments/BHCurveCard';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { School, FlaskConical, Microscope, BookOpen, Beaker } from 'lucide-react';
+import { School, FlaskConical, BookOpen, Beaker, Code } from 'lucide-react';
 
 const Index = () => {
   const [activeTab, setActiveTab] = useState('all');
@@ -28,13 +28,13 @@ const Index = () => {
     },
     {
       id: '2',
-      title: 'Cell Membrane Transport',
-      description: 'Visualize how molecules move across cell membranes through diffusion and active transport.',
-      imageUrl: '/images/experiments/cell-membrane-transport-setup.jpg',
-      category: 'Biology',
+      title: 'Algorithm Complexity Analysis',
+      description: 'Analyze time and space complexity of various algorithms with interactive visualizations.',
+      imageUrl: '/images/experiments/algorithm-analysis-setup.jpg',
+      category: 'Algorithms',
       difficulty: 'Intermediate' as const,
       duration: '20 minutes',
-      path: '/biology'
+      path: '/algorithms'
     },
     {
       id: '3',
@@ -48,13 +48,13 @@ const Index = () => {
     },
     {
       id: '4',
-      title: 'DNA Replication',
-      description: 'Explore the process of DNA replication and the enzymes involved in creating new DNA strands.',
-      imageUrl: '/images/experiments/dna-replication-setup.jpg',
-      category: 'Biology',
+      title: 'Sorting Algorithm Visualization',
+      description: 'Compare different sorting algorithms and understand their performance characteristics.',
+      imageUrl: '/images/experiments/sorting-algorithms-setup.jpg',
+      category: 'Algorithms',
       difficulty: 'Advanced' as const,
       duration: '30 minutes',
-      path: '/biology'
+      path: '/algorithms'
     },
     {
       id: '5',
@@ -85,7 +85,7 @@ const Index = () => {
               Creative<span className="text-primary">thinkers</span> Lab
             </h1>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Interactive simulations and AI-powered tutoring for Physics, Chemistry, and Biology experiments
+              Interactive simulations and AI-powered tutoring for Physics, Chemistry, and Algorithm Analysis
             </p>
             <div className="flex flex-wrap justify-center gap-4 mt-6">
               <Button asChild size="lg" className="gap-2">
@@ -101,9 +101,9 @@ const Index = () => {
                 </Link>
               </Button>
               <Button asChild size="lg" variant="outline" className="gap-2">
-                <Link to="/biology">
-                  <Microscope className="h-5 w-5" />
-                  Biology Lab
+                <Link to="/algorithms">
+                  <Code className="h-5 w-5" />
+                  Algorithm Lab
                 </Link>
               </Button>
             </div>
@@ -140,7 +140,7 @@ const Index = () => {
               <TabsTrigger value="all">All Experiments</TabsTrigger>
               <TabsTrigger value="physics">Physics</TabsTrigger>
               <TabsTrigger value="chemistry">Chemistry</TabsTrigger>
-              <TabsTrigger value="biology">Biology</TabsTrigger>
+              <TabsTrigger value="algorithms">Algorithms</TabsTrigger>
             </TabsList>
             
             <TabsContent value={activeTab} className="mt-0">
