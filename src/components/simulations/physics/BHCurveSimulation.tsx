@@ -1,16 +1,7 @@
 
 import React, { useEffect, useRef, useState } from 'react';
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend
-} from 'chart.js';
-import { Line } from 'react-chartjs-2';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, ResponsiveContainer } from 'recharts';
+import { ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart';
 import { Card, CardContent } from "@/components/ui/card";
 import { Slider } from "@/components/ui/slider";
 import { Label } from "@/components/ui/label";
@@ -20,16 +11,7 @@ import { Button } from "@/components/ui/button";
 import { Magnet, CircleDashed, Power, Zap, FlaskConical, Gauge, ChevronDown, ChevronUp } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-// Register Chart.js components
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend
-);
+// Using Recharts - no registration needed
 
 interface BHCurveSimulationProps {
   isRunning?: boolean;
@@ -261,65 +243,35 @@ export function BHCurveSimulation({ isRunning = false }: BHCurveSimulationProps)
     }
   };
 
-  const chartData = {
-    labels: showHysteresis && ironCore ? hysteresisData.forward.h : data.h,
-    datasets: showHysteresis && ironCore ? [
-      {
-        label: 'Forward Magnetization',
-        data: hysteresisData.forward.b,
-        borderColor: 'rgb(75, 192, 192)',
-        backgroundColor: 'rgba(75, 192, 192, 0.2)',
-        tension: 0.4,
-        pointRadius: 0,
-      },
-      {
-        label: 'Reverse Magnetization',
-        data: hysteresisData.reverse.b,
-        borderColor: 'rgb(255, 99, 132)',
-        backgroundColor: 'rgba(255, 99, 132, 0.2)',
-        tension: 0.4,
-        pointRadius: 0,
-      }
-    ] : [
-      {
-        label: 'B-H Curve',
-        data: data.b,
-        borderColor: 'rgb(75, 192, 192)',
-        backgroundColor: 'rgba(75, 192, 192, 0.2)',
-        tension: 0.4,
-        pointRadius: 0,
-      },
-    ],
-  };
+  // Prepare data for Recharts
+  const chartData = React.useMemo(() => {
+    if (showHysteresis && ironCore) {
+      const forwardData = hysteresisData.forward.h.map((h, i) => ({
+        h,
+        forward: hysteresisData.forward.b[i],
+        reverse: hysteresisData.reverse.b[i] || null,
+      }));
+      return forwardData;
+    } else {
+      return data.h.map((h, i) => ({
+        h,
+        b: data.b[i],
+      }));
+    }
+  }, [data, hysteresisData, showHysteresis, ironCore]);
 
-  const chartOptions = {
-    responsive: true,
-    maintainAspectRatio: false,
-    animation: {
-      duration: 0
+  const chartConfig = {
+    forward: {
+      label: "Forward Magnetization",
+      color: "hsl(var(--primary))",
     },
-    scales: {
-      x: {
-        title: {
-          display: true,
-          text: 'H (A/m)',
-        },
-      },
-      y: {
-        title: {
-          display: true,
-          text: 'B (T)',
-        },
-      },
+    reverse: {
+      label: "Reverse Magnetization",
+      color: "hsl(var(--destructive))",
     },
-    plugins: {
-      legend: {
-        position: 'top' as const,
-      },
-      title: {
-        display: true,
-        text: showHysteresis && ironCore ? 'Magnetic Hysteresis Loop' : 'Magnetic B-H Curve',
-      },
+    b: {
+      label: "B-H Curve",
+      color: "hsl(var(--primary))",
     },
   };
 
@@ -525,7 +477,48 @@ export function BHCurveSimulation({ isRunning = false }: BHCurveSimulationProps)
         </div>
         
         <div className={`h-[300px] ${!powerStatus && 'opacity-50 bg-gray-900'}`}>
-          <Line options={chartOptions} data={chartData} />
+          <ChartContainer config={chartConfig}>
+            <LineChart data={chartData}>
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis 
+                dataKey="h" 
+                label={{ value: 'H (A/m)', position: 'insideBottom', offset: -5 }}
+              />
+              <YAxis 
+                label={{ value: 'B (T)', angle: -90, position: 'insideLeft' }}
+              />
+              <ChartTooltip content={<ChartTooltipContent />} />
+              
+              {showHysteresis && ironCore ? (
+                <>
+                  <Line
+                    type="monotone"
+                    dataKey="forward"
+                    stroke="var(--color-forward)"
+                    strokeWidth={2}
+                    dot={false}
+                    connectNulls={false}
+                  />
+                  <Line
+                    type="monotone"
+                    dataKey="reverse"
+                    stroke="var(--color-reverse)"
+                    strokeWidth={2}
+                    dot={false}
+                    connectNulls={false}
+                  />
+                </>
+              ) : (
+                <Line
+                  type="monotone"
+                  dataKey="b"
+                  stroke="var(--color-b)"
+                  strokeWidth={2}
+                  dot={false}
+                />
+              )}
+            </LineChart>
+          </ChartContainer>
         </div>
         
         <div className="flex justify-between text-xs text-gray-400 mt-2 pt-2 border-t border-gray-700">
