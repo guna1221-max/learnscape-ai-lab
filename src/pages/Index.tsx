@@ -7,14 +7,17 @@ import { NewtonRingsCard } from '@/components/experiments/NewtonRingsCard';
 import { TorsionalPendulumCard } from '@/components/experiments/TorsionalPendulumCard';
 import { SonometerCard } from '@/components/experiments/SonometerCard';
 import { BHCurveCard } from '@/components/experiments/BHCurveCard';
+import { RLCCircuitCard } from '@/components/experiments/RLCCircuitCard';
+import { TheveninCard } from '@/components/experiments/TheveninCard';
+import { SuperpositionCard } from '@/components/experiments/SuperpositionCard';
+import { TransformerCard } from '@/components/experiments/TransformerCard';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { School, FlaskConical, BookOpen, Code } from 'lucide-react';
+import { School, FlaskConical, BookOpen, Code, Zap } from 'lucide-react';
 
 const Index = () => {
   const [activeTab, setActiveTab] = useState('all');
   
-  // Sample experiment data with updated original images
   const experiments = [
     {
       id: '1',
@@ -67,7 +70,6 @@ const Index = () => {
       <Navbar />
       
       <main className="flex-1 container py-8">
-        {/* Hero section */}
         <section className="mb-12">
           <div className="text-center space-y-4">
             <School className="h-16 w-16 mx-auto text-primary mb-2" />
@@ -75,13 +77,19 @@ const Index = () => {
               Creative<span className="text-primary">thinkers</span> Lab
             </h1>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Interactive simulations and AI-powered tutoring for Physics, Chemistry, and Algorithm Analysis
+              Interactive simulations and AI-powered tutoring for Physics, EEE, and Algorithm Analysis
             </p>
             <div className="flex flex-wrap justify-center gap-4 mt-6">
               <Button asChild size="lg" className="gap-2">
                 <Link to="/physics">
                   <FlaskConical className="h-5 w-5" />
                   Physics Lab
+                </Link>
+              </Button>
+              <Button asChild size="lg" variant="outline" className="gap-2">
+                <Link to="/eee/rlc-circuit">
+                  <Zap className="h-5 w-5" />
+                  EEE Lab
                 </Link>
               </Button>
               <Button asChild size="lg" variant="outline" className="gap-2">
@@ -94,36 +102,16 @@ const Index = () => {
           </div>
         </section>
         
-        {/* Featured experiments */}
         <section className="mb-12">
           <div className="flex justify-between items-center mb-6">
             <h2 className="text-2xl font-bold tracking-tight">Featured Experiments</h2>
-            <Button variant="ghost" asChild>
-              <Link to="/experiments" className="flex items-center gap-2">
-                <span>View all</span>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="h-4 w-4"
-                >
-                  <path d="m9 18 6-6-6-6" />
-                </svg>
-              </Link>
-            </Button>
           </div>
           
           <Tabs defaultValue="all" value={activeTab} onValueChange={setActiveTab}>
             <TabsList className="mb-6">
               <TabsTrigger value="all">All Experiments</TabsTrigger>
               <TabsTrigger value="physics">Physics</TabsTrigger>
-              
+              <TabsTrigger value="beee">BEEE / EEE</TabsTrigger>
               <TabsTrigger value="algorithms">Algorithms</TabsTrigger>
             </TabsList>
             
@@ -141,17 +129,27 @@ const Index = () => {
                     path={experiment.path}
                   />
                 ))}
-                {/* Add experiment cards directly to ensure they appear */}
-                <NewtonRingsCard />
-                <TorsionalPendulumCard />
-                <SonometerCard />
-                <BHCurveCard />
+                {(activeTab === 'all' || activeTab === 'physics') && (
+                  <>
+                    <NewtonRingsCard />
+                    <TorsionalPendulumCard />
+                    <SonometerCard />
+                  </>
+                )}
+                {(activeTab === 'all' || activeTab === 'beee') && (
+                  <>
+                    <BHCurveCard />
+                    <RLCCircuitCard />
+                    <TheveninCard />
+                    <SuperpositionCard />
+                    <TransformerCard />
+                  </>
+                )}
               </div>
             </TabsContent>
           </Tabs>
         </section>
         
-        {/* AI Tutor Section */}
         <section className="mb-12">
           <div className="bg-muted rounded-xl p-6 md:p-8">
             <div className="flex flex-col md:flex-row gap-8 items-center">

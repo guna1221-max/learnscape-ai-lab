@@ -13,6 +13,10 @@ import NewtonRingsLab from "./pages/NewtonRingsLab";
 import TorsionalPendulumLab from "./pages/TorsionalPendulumLab";
 import SonometerLab from "./pages/SonometerLab";
 import BHCurveLab from "./pages/BHCurveLab";
+import RLCCircuitLab from "./pages/RLCCircuitLab";
+import TheveninLab from "./pages/TheveninLab";
+import SuperpositionLab from "./pages/SuperpositionLab";
+import TransformerLab from "./pages/TransformerLab";
 import TutorPage from "./pages/TutorPage";
 import NotFound from "./pages/NotFound";
 import "./App.css";
@@ -33,6 +37,10 @@ const App = () => (
             <Route path="/physics/torsional-pendulum" element={<TorsionalPendulumLab />} />
             <Route path="/physics/sonometer" element={<SonometerLab />} />
             <Route path="/physics/bh-curve" element={<BHCurveLab />} />
+            <Route path="/eee/rlc-circuit" element={<RLCCircuitLab />} />
+            <Route path="/eee/thevenin" element={<TheveninLab />} />
+            <Route path="/eee/superposition" element={<SuperpositionLab />} />
+            <Route path="/eee/transformer" element={<TransformerLab />} />
             <Route path="/algorithms" element={<AlgorithmLab />} />
             
             <Route path="/tutor" element={<TutorPage />} />
