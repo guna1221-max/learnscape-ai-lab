@@ -112,14 +112,10 @@ export function Navbar() {
             >
               AI Tutor
             </Link>
-            <Button 
-              variant="outline" 
-              size="sm" 
-              className="flex items-center gap-2 w-full justify-center"
-            >
-              <FlaskConical className="h-4 w-4" />
-              New Experiment
-            </Button>
+            <div className="flex gap-2">
+              <ScientificCalculator />
+              <Multimeter />
+            </div>
           </div>
         </div>
       )}
