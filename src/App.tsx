@@ -17,6 +17,15 @@ import RLCCircuitLab from "./pages/RLCCircuitLab";
 import TheveninLab from "./pages/TheveninLab";
 import SuperpositionLab from "./pages/SuperpositionLab";
 import TransformerLab from "./pages/TransformerLab";
+import KirchhoffLab from "./pages/KirchhoffLab";
+import NortonLab from "./pages/NortonLab";
+import MaxPowerTransferLab from "./pages/MaxPowerTransferLab";
+import WheatstoneLab from "./pages/WheatstoneLab";
+import StarDeltaLab from "./pages/StarDeltaLab";
+import TransientLab from "./pages/TransientLab";
+import PowerFactorLab from "./pages/PowerFactorLab";
+import LissajousLab from "./pages/LissajousLab";
+import MeshNodalLab from "./pages/MeshNodalLab";
 import TutorPage from "./pages/TutorPage";
 import NotFound from "./pages/NotFound";
 import "./App.css";
@@ -41,8 +50,16 @@ const App = () => (
             <Route path="/eee/thevenin" element={<TheveninLab />} />
             <Route path="/eee/superposition" element={<SuperpositionLab />} />
             <Route path="/eee/transformer" element={<TransformerLab />} />
+            <Route path="/eee/kirchhoff" element={<KirchhoffLab />} />
+            <Route path="/eee/norton" element={<NortonLab />} />
+            <Route path="/eee/max-power-transfer" element={<MaxPowerTransferLab />} />
+            <Route path="/eee/wheatstone" element={<WheatstoneLab />} />
+            <Route path="/eee/star-delta" element={<StarDeltaLab />} />
+            <Route path="/eee/transient" element={<TransientLab />} />
+            <Route path="/eee/power-factor" element={<PowerFactorLab />} />
+            <Route path="/eee/lissajous" element={<LissajousLab />} />
+            <Route path="/eee/mesh-nodal" element={<MeshNodalLab />} />
             <Route path="/algorithms" element={<AlgorithmLab />} />
-            
             <Route path="/tutor" element={<TutorPage />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
