@@ -152,6 +152,15 @@ const Index = () => {
                     <TheveninCard />
                     <SuperpositionCard />
                     <TransformerCard />
+                    <KirchhoffCard />
+                    <NortonCard />
+                    <MaxPowerCard />
+                    <WheatstoneCard />
+                    <StarDeltaCard />
+                    <TransientCard />
+                    <PowerFactorCard />
+                    <LissajousCard />
+                    <MeshNodalCard />
                   </>
                 )}
               </div>
