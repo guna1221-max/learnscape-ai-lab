@@ -20,7 +20,6 @@ import { TransientCard } from '@/components/experiments/TransientCard';
 import { PowerFactorCard } from '@/components/experiments/PowerFactorCard';
 import { LissajousCard } from '@/components/experiments/LissajousCard';
 import { MeshNodalCard } from '@/components/experiments/MeshNodalCard';
-import { TransformerCard } from '@/components/experiments/TransformerCard';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { School, FlaskConical, BookOpen, Code, Zap } from 'lucide-react';
