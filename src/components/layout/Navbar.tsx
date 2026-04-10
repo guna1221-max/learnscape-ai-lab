@@ -36,12 +36,12 @@ export function Navbar() {
           </Link>
         </div>
         
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-2">
+          <div className="hidden md:flex items-center gap-2">
+            <ScientificCalculator />
+            <Multimeter />
+          </div>
           <ModeToggle />
-          <Button variant="outline" size="sm" className="hidden md:flex items-center gap-2">
-            <FlaskConical className="h-4 w-4" />
-            New Experiment
-          </Button>
         </div>
         
         {/* Mobile Menu Button */}
