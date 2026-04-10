@@ -14,7 +14,7 @@ const WheatstoneLab = () => {
         <p className="text-muted-foreground mb-6">Measure unknown resistance using balanced bridge principle</p>
         <SimulationController isRunning={isRunning} onToggle={() => setIsRunning(!isRunning)} title="Wheatstone Bridge" />
         <WheatstoneSimulation isRunning={isRunning} />
-        <div className="mt-8"><AiChatbox experimentContext="Wheatstone Bridge experiment for resistance measurement" /></div>
+        <div className="mt-8"><AiChatbox context="Wheatstone Bridge experiment for resistance measurement" /></div>
       </main>
     </div>
   );

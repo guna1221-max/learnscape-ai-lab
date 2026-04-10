@@ -14,7 +14,7 @@ const MeshNodalLab = () => {
         <p className="text-muted-foreground mb-6">Solve DC circuits using mesh current and node voltage methods</p>
         <SimulationController isRunning={isRunning} onToggle={() => setIsRunning(!isRunning)} title="Mesh & Nodal Analysis" />
         <MeshNodalSimulation isRunning={isRunning} />
-        <div className="mt-8"><AiChatbox experimentContext="Mesh and Nodal analysis methods for circuit solving" /></div>
+        <div className="mt-8"><AiChatbox context="Mesh and Nodal analysis methods for circuit solving" /></div>
       </main>
     </div>
   );

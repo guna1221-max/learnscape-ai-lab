@@ -14,7 +14,7 @@ const KirchhoffLab = () => {
         <p className="text-muted-foreground mb-6">Verify Kirchhoff's Voltage Law and Current Law in multi-loop DC circuits</p>
         <SimulationController isRunning={isRunning} onToggle={() => setIsRunning(!isRunning)} title="KVL/KCL Verification" />
         <KirchhoffSimulation isRunning={isRunning} />
-        <div className="mt-8"><AiChatbox experimentContext="Kirchhoff's Voltage Law and Current Law verification experiment" /></div>
+        <div className="mt-8"><AiChatbox context="Kirchhoff's Voltage Law and Current Law verification experiment" /></div>
       </main>
     </div>
   );

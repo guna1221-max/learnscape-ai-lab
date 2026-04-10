@@ -14,7 +14,7 @@ const NortonLab = () => {
         <p className="text-muted-foreground mb-6">Find Norton equivalent circuit with current source and parallel resistance</p>
         <SimulationController isRunning={isRunning} onToggle={() => setIsRunning(!isRunning)} title="Norton's Theorem" />
         <NortonSimulation isRunning={isRunning} />
-        <div className="mt-8"><AiChatbox experimentContext="Norton's Theorem experiment" /></div>
+        <div className="mt-8"><AiChatbox context="Norton's Theorem experiment" /></div>
       </main>
     </div>
   );

@@ -14,7 +14,7 @@ const LissajousLab = () => {
         <p className="text-muted-foreground mb-6">Generate and analyze Lissajous patterns for frequency comparison and phase measurement</p>
         <SimulationController isRunning={isRunning} onToggle={() => setIsRunning(!isRunning)} title="Lissajous Figures" />
         <LissajousSimulation isRunning={isRunning} />
-        <div className="mt-8"><AiChatbox experimentContext="Lissajous figures using CRO for frequency and phase measurement" /></div>
+        <div className="mt-8"><AiChatbox context="Lissajous figures using CRO for frequency and phase measurement" /></div>
       </main>
     </div>
   );

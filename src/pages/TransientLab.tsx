@@ -14,7 +14,7 @@ const TransientLab = () => {
         <p className="text-muted-foreground mb-6">Study step response of RC, RL, and RLC circuits with time constant analysis</p>
         <SimulationController isRunning={isRunning} onToggle={() => setIsRunning(!isRunning)} title="Transient Response" />
         <TransientSimulation isRunning={isRunning} />
-        <div className="mt-8"><AiChatbox experimentContext="Transient response analysis of RC, RL, and RLC circuits" /></div>
+        <div className="mt-8"><AiChatbox context="Transient response analysis of RC, RL, and RLC circuits" /></div>
       </main>
     </div>
   );

@@ -14,7 +14,7 @@ const MaxPowerTransferLab = () => {
         <p className="text-muted-foreground mb-6">Determine load resistance for maximum power delivery from a source network</p>
         <SimulationController isRunning={isRunning} onToggle={() => setIsRunning(!isRunning)} title="Max Power Transfer" />
         <MaxPowerTransferSimulation isRunning={isRunning} />
-        <div className="mt-8"><AiChatbox experimentContext="Maximum Power Transfer Theorem experiment" /></div>
+        <div className="mt-8"><AiChatbox context="Maximum Power Transfer Theorem experiment" /></div>
       </main>
     </div>
   );

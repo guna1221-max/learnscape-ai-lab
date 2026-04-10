@@ -14,7 +14,7 @@ const PowerFactorLab = () => {
         <p className="text-muted-foreground mb-6">Measure and analyze real, reactive, and apparent power with power triangle visualization</p>
         <SimulationController isRunning={isRunning} onToggle={() => setIsRunning(!isRunning)} title="Power Factor" />
         <PowerFactorSimulation isRunning={isRunning} />
-        <div className="mt-8"><AiChatbox experimentContext="Power factor measurement and power triangle analysis" /></div>
+        <div className="mt-8"><AiChatbox context="Power factor measurement and power triangle analysis" /></div>
       </main>
     </div>
   );

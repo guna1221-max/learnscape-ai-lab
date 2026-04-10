@@ -14,7 +14,7 @@ const StarDeltaLab = () => {
         <p className="text-muted-foreground mb-6">Convert between star (Y) and delta (Δ) resistor network configurations</p>
         <SimulationController isRunning={isRunning} onToggle={() => setIsRunning(!isRunning)} title="Star-Delta Transform" />
         <StarDeltaSimulation isRunning={isRunning} />
-        <div className="mt-8"><AiChatbox experimentContext="Star-Delta (Y-Δ) transformation experiment" /></div>
+        <div className="mt-8"><AiChatbox context="Star-Delta (Y-Δ) transformation experiment" /></div>
       </main>
     </div>
   );
