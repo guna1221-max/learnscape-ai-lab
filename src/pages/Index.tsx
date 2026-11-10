@@ -11,15 +11,6 @@ import { RLCCircuitCard } from '@/components/experiments/RLCCircuitCard';
 import { TheveninCard } from '@/components/experiments/TheveninCard';
 import { SuperpositionCard } from '@/components/experiments/SuperpositionCard';
 import { TransformerCard } from '@/components/experiments/TransformerCard';
-import { KirchhoffCard } from '@/components/experiments/KirchhoffCard';
-import { NortonCard } from '@/components/experiments/NortonCard';
-import { MaxPowerCard } from '@/components/experiments/MaxPowerCard';
-import { WheatstoneCard } from '@/components/experiments/WheatstoneCard';
-import { StarDeltaCard } from '@/components/experiments/StarDeltaCard';
-import { TransientCard } from '@/components/experiments/TransientCard';
-import { PowerFactorCard } from '@/components/experiments/PowerFactorCard';
-import { LissajousCard } from '@/components/experiments/LissajousCard';
-import { MeshNodalCard } from '@/components/experiments/MeshNodalCard';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { School, FlaskConical, BookOpen, Code, Zap } from 'lucide-react';
@@ -32,7 +23,7 @@ const Index = () => {
       id: '1',
       title: 'Simple Pendulum',
       description: 'Explore the physics of pendulum motion and how parameters like length and gravity affect the period.',
-      imageUrl: '/images/experiments/simple-pendulum.jpg',
+      imageUrl: '/images/experiments/simple-pendulum-setup.jpg',
       category: 'Physics',
       difficulty: 'Beginner' as const,
       duration: '15 minutes',
@@ -42,7 +33,7 @@ const Index = () => {
       id: '2',
       title: 'Algorithm Complexity Analysis',
       description: 'Analyze time and space complexity of various algorithms with interactive visualizations.',
-      imageUrl: '/images/experiments/algorithm-analysis.jpg',
+      imageUrl: '/images/experiments/algorithm-analysis-setup.jpg',
       category: 'Algorithms',
       difficulty: 'Intermediate' as const,
       duration: '20 minutes',
@@ -52,7 +43,7 @@ const Index = () => {
       id: '3',
       title: 'Wave Interference',
       description: 'Investigate how waves interact with each other through constructive and destructive interference.',
-      imageUrl: '/images/experiments/wave-interference.jpg',
+      imageUrl: '/images/experiments/wave-interference-setup.jpg',
       category: 'Physics',
       difficulty: 'Advanced' as const,
       duration: '25 minutes',
@@ -62,7 +53,7 @@ const Index = () => {
       id: '4',
       title: 'Sorting Algorithm Visualization',
       description: 'Compare different sorting algorithms and understand their performance characteristics.',
-      imageUrl: '/images/experiments/sorting-algorithms.jpg',
+      imageUrl: '/images/experiments/sorting-algorithms-setup.jpg',
       category: 'Algorithms',
       difficulty: 'Advanced' as const,
       duration: '30 minutes',
@@ -152,15 +143,6 @@ const Index = () => {
                     <TheveninCard />
                     <SuperpositionCard />
                     <TransformerCard />
-                    <KirchhoffCard />
-                    <NortonCard />
-                    <MaxPowerCard />
-                    <WheatstoneCard />
-                    <StarDeltaCard />
-                    <TransientCard />
-                    <PowerFactorCard />
-                    <LissajousCard />
-                    <MeshNodalCard />
                   </>
                 )}
               </div>
